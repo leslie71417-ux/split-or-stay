@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Split or Stay — 別れる？別れない？</title>
+<meta name="description" content="Post your relationship dilemma anonymously. Strangers in the US and Japan swipe: break up or stay. 恋愛の悩みを匿名で投稿、見知らぬ誰かが判定。">
+<meta name="theme-color" content="#0A0614">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Split or Stay — 別れる？別れない？">
+<meta property="og:description" content="Strangers in the US and Japan decide. You choose. 匿名で恋愛相談、日米の誰かが判定。">
+<meta property="og:url" content="https://YOUR-SITE.vercel.app/">
+<meta property="og:image" content="https://YOUR-SITE.vercel.app/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Share+Tech+Mono&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} body{margin:0} [hidden]{display:none!important} img{max-width:100%}</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <button class="wordmark" id="logo" type="button"><i>Split</i> or <em>Stay</em></button>
+    <div class="pills">
+      <button class="pill" id="regionBtn" type="button"></button>
+      <button class="pill" id="langBtn" type="button"></button>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <section class="view" id="v-home">
+    <div class="hero">
+      <h1><span class="a" data-t="h1a"></span><br><span class="b" data-t="h1b"></span></h1>
+      <p data-t="tagline"></p>
+    </div>
+    <div class="bigbtns">
+      <button class="bigbtn judge" type="button" data-go="judge"><span><span data-t="judgeBtn"></span><small data-t="judgeSub"></small></span><span class="arr">→</span></button>
+      <button class="bigbtn ask" type="button" data-go="ask"><span><span data-t="askBtn"></span><small data-t="askSub"></small></span><span class="arr">＋</span></button>
+    </div>
+    <div class="stat">
+      <div><b id="statQ">–</b><span class="small muted" data-t="statQ"></span></div>
+      <div><b id="statMine">–</b><span class="small muted" data-t="statMine"></span></div>
+    </div>
+    <div class="how small">
+      <span>← 💔</span><span data-t="howL"></span>
+      <span>→ ❤️</span><span data-t="howR"></span>
+      <span>↑</span><span data-t="howU"></span>
+    </div>
+    <div class="legal-links"><a href="/terms.html" data-t="terms"></a><a href="/privacy.html" data-t="privacy"></a><span><span data-t="contact"></span>: <span class="contact-email"></span></span></div>
+  </section>
+
+  <!-- JUDGE -->
+  <section class="view" id="v-judge" hidden>
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <span class="label" data-t="judgeTitle"></span>
+      <button class="pill" id="poolBtn" type="button"></button>
+    </div>
+    <div class="deck" id="deck"><div class="boot"><b>CONNECTING</b><span data-t="connecting"></span></div></div>
+    <div class="actions" id="actions">
+      <button class="act brk" id="bBrk" type="button">💔 <span data-t="brk"></span></button>
+      <button class="act skip" id="bSkip" type="button" data-t="skip"></button>
+      <button class="act stay" id="bStay" type="button">❤️ <span data-t="stay"></span></button>
+    </div>
+    <div class="hint" data-t="hint"></div>
+    <div class="notice" id="roJudge" hidden data-t="readonly" style="margin-top:12px"></div>
+  </section>
+
+  <!-- ASK -->
+  <section class="view" id="v-ask" hidden>
+    <form class="form" id="askForm" novalidate>
+      <h2 data-t="askTitle"></h2>
+      <div class="field">
+        <label for="qText" data-t="qLabel"></label>
+        <textarea id="qText" maxlength="800"></textarea>
+        <div class="counter"><span id="qCount">0</span> / 800</div>
+      </div>
+      <div class="field">
+        <span class="label" data-t="tagsLabel"></span>
+        <div class="chips" id="tagChips"></div>
+      </div>
+      <div class="field">
+        <span class="label" data-t="audLabel"></span>
+        <div class="seg" id="audSeg"></div>
+        <span class="small muted" data-t="audHint"></span>
+      </div>
+      <div class="field">
+        <label for="qLen" data-t="lenLabel"></label>
+        <select id="qLen"></select>
+      </div>
+      <div class="note" data-t="privacy"></div>
+      <div class="notice" id="roAsk" hidden data-t="readonly"></div>
+      <p class="agree" id="agreeNote" style="margin:0"></p>
+      <button class="btn wide" id="postBtn" type="submit" data-t="post"></button>
+    </form>
+    <div id="askOut" style="margin-top:14px"></div>
+  </section>
+
+  <!-- MINE -->
+  <section class="view" id="v-mine" hidden>
+    <div class="mine">
+      <div class="row" style="justify-content:space-between;align-items:center">
+        <h2 data-t="mineTitle"></h2>
+        <button class="pill" id="refreshMine" type="button" data-t="refresh"></button>
+      </div>
+      <div id="mineList"></div>
+    </div>
+  </section>
+
+  
+</div>
+
+<nav class="tabs" aria-label="Main">
+  <div class="in">
+    <button type="button" data-go="home"><span>⌂</span><em data-t="tHome" style="font-style:normal"></em></button>
+    <button type="button" data-go="judge"><span>⚖︎</span><em data-t="tJudge" style="font-style:normal"></em></button>
+    <button type="button" data-go="ask"><span>＋</span><em data-t="tAsk" style="font-style:normal"></em></button>
+    <button type="button" data-go="mine"><span>☰</span><em data-t="tMine" style="font-style:normal"></em></button>
+  </div>
+</nav>
+
+<div class="overlay" id="ageGate" hidden>
+  <div class="dialog">
+    <h2 data-t="ageTitle"></h2>
+    <p class="muted" style="margin:0" id="ageBody"></p>
+    <button class="btn wide" id="ageYes" type="button" data-t="ageYes"></button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="/config.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Split or Stay 管理后台</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0A0614">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=Share+Tech+Mono&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)} body{margin:0} [hidden]{display:none!important} .app{padding-bottom:40px}</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <a class="wordmark" href="/" style="text-decoration:none"><i>Split</i> or <em>Stay</em></a>
+    <button class="pill" id="signOut" type="button" hidden>退出登录</button>
+  </header>
+  <div class="mine">
+    <div class="row" style="justify-content:space-between;align-items:center">
+      <h2>管理后台</h2>
+      <button class="pill" id="refresh" type="button" hidden>刷新</button>
+    </div>
+
+    <form class="login" id="login" hidden novalidate>
+      <p class="muted" style="margin:0">用你的管理员邮箱登录。我们会发一封登录链接邮件，点开就能进来。</p>
+      <div class="field"><label for="email">邮箱</label><input type="text" id="email" inputmode="email" autocomplete="email" placeholder="you@example.com"></div>
+      <button class="btn wide" type="submit">发送登录链接</button>
+      <div id="loginMsg"></div>
+    </form>
+
+    <div id="notAdmin" class="notice" hidden></div>
+    <div id="adminBody" style="display:grid;gap:12px"></div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="/config.js"></script>
+<script src="/admin.js"></script>
+</body>
+</html>
