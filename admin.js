@@ -43,8 +43,12 @@ async function render(){
       all("votes","post_id,user_id,choice,region,comment,created_at"),
       all("reports","post_id,created_at")
     ]);
+    const {data:sids}=await sb.rpc("seed_ids");
+    var seedSet=new Set(sids||[]);
   }catch(e){ box.innerHTML=`<div class="notice">读取失败：${esc(e.message)}</div>`; return; }
   const now=Date.now(), ts=x=>new Date(x).getTime();
+  const realPosts=posts.filter(p=>!seedSet.has(p.id));
+  const seedLeft={jp:0,us:0,global:0}; posts.forEach(p=>{ if(seedSet.has(p.id)) seedLeft[p.aud]=(seedLeft[p.aud]||0)+1; });
   const act24=profiles.filter(a=>now-ts(a.last_seen)<DAY).length, act7=profiles.filter(a=>now-ts(a.last_seen)<7*DAY).length;
   const new7=profiles.filter(a=>now-ts(a.first_seen)<7*DAY).length;
   const askers=new Set(posts.filter(p=>p.author).map(p=>p.author)).size;
@@ -56,7 +60,7 @@ async function render(){
   const aud={jp:0,us:0,global:0}; posts.forEach(p=>aud[p.aud]=(aud[p.aud]||0)+1);
   const tagCount={}; posts.forEach(p=>(p.tags||[]).forEach(k=>tagCount[k]=(tagCount[k]||0)+1));
   const days=[...Array(14)].map((_,i)=>{const d=new Date(now-(13-i)*DAY);return {k:dayKey(d),l:(d.getMonth()+1)+"/"+d.getDate()}});
-  const qd=days.map(d=>posts.filter(p=>dayKey(ts(p.created_at))===d.k).length);
+  const qd=days.map(d=>realPosts.filter(p=>dayKey(ts(p.created_at))===d.k).length);
   const vd=days.map(d=>votes.filter(v=>dayKey(ts(v.created_at))===d.k).length);
   const ud=days.map(d=>profiles.filter(p=>dayKey(ts(p.first_seen))===d.k).length);
   const dayRow=`<div class="days">${days.map((d,i)=>`<span>${i%2?"":d.l}</span>`).join("")}</div>`;
@@ -66,14 +70,21 @@ async function render(){
   const flagged=posts.filter(p=>repCount[p.id]||p.hidden).sort((a,b)=>(repCount[b.id]||0)-(repCount[a.id]||0));
   const row=p=>{const vs=vByPost[p.id]||[], n=vs.length, b=vs.filter(v=>v.choice==="break").length;
     return `<div class="arow"><div class="txt">${esc(p.text)}</div>
-      <div class="m"><span>${FLAG[p.region]||"🌐"} → ${AUD[p.aud]||"全球"} · ${new Date(p.created_at).toLocaleString("zh-CN",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"})} · ${n}票${n?" · "+Math.round(b/n*100)+"%💔":""}${repCount[p.id]?` · <b style="color:var(--brk)">${repCount[p.id]}次举报</b>`:""}${p.hidden?` · <b style="color:var(--brk)">已隐藏</b>`:""}</span>
+      <div class="m"><span>${FLAG[p.region]||"🌐"} → ${AUD[p.aud]||"全球"} · ${new Date(p.created_at).toLocaleString("zh-CN",{month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"})} · ${n}票${n?" · "+Math.round(b/n*100)+"%💔":""}${seedSet.has(p.id)?` · <b style="color:var(--acid)">预置</b>`:""}${repCount[p.id]?` · <b style="color:var(--brk)">${repCount[p.id]}次举报</b>`:""}${p.hidden?` · <b style="color:var(--brk)">已隐藏</b>`:""}</span>
       <span class="row"><button class="btn danger" type="button" data-hide="${esc(p.id)}" data-v="${p.hidden?0:1}">${p.hidden?"恢复显示":"隐藏"}</button><button class="btn danger" type="button" data-del="${esc(p.id)}">删除</button></span></div></div>`};
   box.innerHTML = `
     <div class="kpis">
       ${kpi(act24,"24小时活跃用户")}${kpi(act7,"7天活跃用户")}
       ${kpi(profiles.length,"累计用户")}${kpi(new7,"7天新用户")}
       ${kpi(askers,"提问用户")}${kpi(voters,"投票用户")}
-      ${kpi(posts.length,"问题总数")}${kpi(votes.length,"投票总数")}
+      ${kpi(realPosts.length,"真人提问数")}${kpi(votes.length,"投票总数")}
+      ${kpi(seedSet.size,"预置问题剩余")}${kpi(cms,"评论数")}
+    </div>
+    <div class="panel"><h3>预置问题替换进度</h3>
+      <p class="small muted" style="margin:0">每有一个真人发帖，就自动删除一条同地区、票数最少的预置问题。真人提问不会被删除。</p>
+      <div class="kv"><span>🇯🇵 日本</span><b>剩 ${seedLeft.jp||0} 条</b></div>
+      <div class="kv"><span>🇺🇸 美国</span><b>剩 ${seedLeft.us||0} 条</b></div>
+      <div class="kv"><span>🌐 全球</span><b>剩 ${seedLeft.global||0} 条</b></div>
     </div>
     <div class="panel"><h3>每日新用户（近14天）</h3>${colsHTML(ud,"v")}${dayRow}</div>
     <div class="panel"><h3>每日新提问（近14天）</h3>${colsHTML(qd,"q")}${dayRow}</div>
@@ -92,8 +103,11 @@ async function render(){
       <p class="small muted" style="margin:0">被 3 个不同用户举报的问题会自动隐藏，等你来决定恢复还是删除。</p>
       ${flagged.length?flagged.map(row).join(""):`<p class="muted small" style="margin:0">没有待处理的内容。</p>`}
     </div>
-    <div class="panel"><h3>最新问题</h3>
-      ${posts.length?[...posts].sort((a,b)=>ts(b.created_at)-ts(a.created_at)).slice(0,40).map(row).join(""):`<p class="muted small" style="margin:0">还没有问题。</p>`}
+    <div class="panel"><h3>最新真人提问</h3>
+      ${realPosts.length?[...realPosts].sort((a,b)=>ts(b.created_at)-ts(a.created_at)).slice(0,40).map(row).join(""):`<p class="muted small" style="margin:0">还没有真人提问。</p>`}
+    </div>
+    <div class="panel"><h3>预置问题（最近 20 条）</h3>
+      ${[...posts].filter(p=>seedSet.has(p.id)).sort((a,b)=>ts(b.created_at)-ts(a.created_at)).slice(0,20).map(row).join("")||`<p class="muted small" style="margin:0">预置问题已全部替换完。</p>`}
     </div>`;
   box.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{
     if(b.dataset.armed!=="1"){ b.dataset.armed="1"; b.textContent="确认删除？"; return; }

@@ -214,3 +214,20 @@ nav.tabs button[aria-current="page"]{color:var(--acid);text-shadow:0 0 10px rgba
 .cmp-tile b{font-family:var(--f-mono);font-size:34px;line-height:1.05;color:var(--acid);font-variant-numeric:tabular-nums}
 .cmp-tile b.none{color:var(--muted)}
 .cmp-sub{font-size:11px;font-family:var(--f-mono);color:var(--muted)}
+/* v2: translate, success page, mine tabs, edit/delete */
+.trbtn{margin-left:auto;border:1px solid var(--stay);background:var(--stay-soft);color:var(--stay);font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;padding:3px 10px}
+.tr-note{font-size:11px;font-family:var(--f-mono);color:var(--muted);margin-top:-6px}
+.clamp{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}
+.success{display:grid;gap:14px;padding:24px 20px;background:var(--surface);border:2px solid var(--acid);box-shadow:0 0 30px rgba(232,255,46,.18)}
+.success h2{font-size:34px;color:var(--acid)}
+.ok-badge{width:56px;height:56px;display:grid;place-items:center;font-size:30px;font-weight:700;background:var(--acid);color:var(--on-neon);clip-path:var(--cut)}
+.q-preview{background:var(--surface2);border-left:2px solid var(--brk);padding:10px 12px;font-size:14px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:8em;overflow:auto}
+.seg.two{grid-template-columns:1fr 1fr}
+#mineTabs{margin-bottom:4px}
+.card-actions{align-items:center;flex-wrap:wrap}
+.pill.danger{border-color:var(--brk);color:var(--brk)}
+.btn.danger-fill{background:var(--brk);color:var(--on-neon)}
+.qcard .edit-box{display:grid;gap:10px}
+.qcard .edit-box textarea{min-height:120px}
+.my-vote{font-size:14px}
+.my-vote b.brk{color:var(--brk)} .my-vote b.stay{color:var(--stay)}

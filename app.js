@@ -10,7 +10,7 @@ const T = {
     askTitle:"What's going on?",qLabel:"Your situation",qPh:"e.g. We've been together 3 years. He wants to move to Osaka for work and expects me to quit my job…",
     tagsLabel:"Tags (optional)",lenLabel:"How long together?",privacy:"Stay anonymous: don't include real names, workplaces, schools or social handles. Emails, phone numbers, links and @handles are hidden automatically.",
     post:"Post anonymously",posted:"Posted. It's now in the judging pool.",tooShort:"Write at least 30 characters so people can judge fairly.",
-    mineTitle:"My questions",refresh:"Refresh",mineEmpty:"You haven't asked anything yet.",askNow:"Ask the crowd",
+    mineTitle:"Mine",refresh:"Refresh",mineEmpty:"You haven't asked anything yet.",askNow:"Ask the crowd",
     votes:"votes",saidBrk:"said break up",saidStay:"said stay",noVotes:"No votes yet. Check back soon.",
     followPh:"Add an update (what did you decide?)",followSave:"Save update",update:"Update",copy:"Copy result",copied:"Copied",
     youSaid:"You said",agree:"agree with you",of:"of",comments:"Comments",commentPh:"Leave a comment (optional)",send:"Send",next:"Skip →",
@@ -19,7 +19,7 @@ const T = {
     exWhy:"This was an example card, so nothing was saved. Examples only appear while nobody has posted a real question yet. As soon as a real question is posted, every vote and comment is saved and counted.",askFirst:"Post the first real question →",
     safetyTitle:"This sounds like it could involve your safety",safetyBody:"We didn't post it. A crowd vote isn't the right tool for this, and you deserve real support. These services are free and confidential:",
     back:"Back to edit",ageTitle:"18+ only",ageBody:"Split or Stay is for adults. Posts are anonymous and judged by strangers.",ageYes:"I'm 18 or older",
-    tHome:"Home",splitWord:"Split",vsTitle:"US vs Japan",nameUS:"US",nameJP:"Japan",nameOther:"Other regions",noRegionVotes:"No votes yet",totalVotes:"votes in total",yourComment:"Your comment",report:"⚑ Report",reportArm:"⚑ Tap again to report",reported:"Reported. Thanks, we'll review it.",terms:"Terms",privacy:"Privacy",contact:"Contact",connecting:"Connecting…",rateLimited:"You're going a bit fast. Try again in a little while.",netErr:"Can't reach the server. Check your connection and refresh.",agree:"By posting you agree to the <a href=\"/terms.html\">Terms</a> and <a href=\"/privacy.html\">Privacy Policy</a>.",ageBodyHtml:"Split or Stay is for adults. Posts are anonymous and judged by strangers. By continuing you agree to the <a href=\"/terms.html\">Terms</a> and <a href=\"/privacy.html\">Privacy Policy</a>.",shareTail:"Judge mine:",tJudge:"Judge",tAsk:"Ask",tMine:"Mine",regionUS:"🇺🇸 US",regionJP:"🇯🇵 Tokyo/JP",regionOther:"🌐 Other",
+    tHome:"Home",homeScope:"Region",translate:"Translate",original:"Show original",machineTr:"Machine translation",translated:"Translated",trFail:"Couldn't translate right now. Try again later.",postedTitle:"Posted!",postedBody:"Your question is now live for {aud}. People there can start judging it right away.",viewMine:"View my question",judgeWhile:"Judge others while you wait",askAnother:"Ask another question",tabQ:"My questions",tabR:"My replies",edit:"Edit",delete:"Delete",save:"Save",cancel:"Cancel",saved:"Saved",deleted:"Deleted",yesDelete:"Yes, delete",delQTitle:"Delete this question?",delQBody:"All its votes and comments will be deleted too. This can't be undone.",delRTitle:"Delete your reply?",delRBody:"Your vote and comment on this question will be removed.",repliesEmpty:"You haven't judged anything yet.",yourVote:"Your vote",hiddenChip:"Hidden after reports",splitWord:"Split",vsTitle:"US vs Japan",nameUS:"US",nameJP:"Japan",nameOther:"Other regions",noRegionVotes:"No votes yet",totalVotes:"votes in total",yourComment:"Your comment",report:"⚑ Report",reportArm:"⚑ Tap again to report",reported:"Reported. Thanks, we'll review it.",terms:"Terms",privacy:"Privacy",contact:"Contact",connecting:"Connecting…",rateLimited:"You're going a bit fast. Try again in a little while.",netErr:"Can't reach the server. Check your connection and refresh.",agree:"By posting you agree to the <a href=\"/terms.html\">Terms</a> and <a href=\"/privacy.html\">Privacy Policy</a>.",ageBodyHtml:"Split or Stay is for adults. Posts are anonymous and judged by strangers. By continuing you agree to the <a href=\"/terms.html\">Terms</a> and <a href=\"/privacy.html\">Privacy Policy</a>.",shareTail:"Judge mine:",tJudge:"Judge",tAsk:"Ask",tMine:"Mine",regionUS:"🇺🇸 US",regionJP:"🇯🇵 Tokyo/JP",regionOther:"🌐 Other",
     offline:"Live data isn't available in this view, so you're seeing example cards only.",err:"Something went wrong saving that. Try again.",
     lens:{a:"Under 6 months",b:"6–12 months",c:"1–3 years",d:"3+ years",m:"Married"},
     tags:{cheat:"Cheating",ldr:"Long distance",ghost:"Left on read",family:"Family",money:"Money",marriage:"Marriage timing",spark:"Spark is gone",jeal:"Jealousy",other:"Other"}},
@@ -32,7 +32,7 @@ const T = {
     askTitle:"何があったの？",qLabel:"あなたの状況",qPh:"例：付き合って3年。彼が大阪転勤になり、私に仕事を辞めてついてきてほしいと言っています…",
     tagsLabel:"タグ（任意）",lenLabel:"交際期間",privacy:"匿名を守るため、実名・会社名・学校名・SNSアカウントは書かないでください。メール・電話番号・リンク・@IDは自動で非表示になります。",
     post:"匿名で投稿",posted:"投稿しました。判定プールに入りました。",tooShort:"公平に判定してもらうため、30文字以上書いてください。",
-    mineTitle:"わたしの相談",refresh:"更新",mineEmpty:"まだ相談していません。",askNow:"相談する",
+    mineTitle:"マイページ",refresh:"更新",mineEmpty:"まだ相談していません。",askNow:"相談する",
     votes:"票",saidBrk:"が別れる派",saidStay:"が別れない派",noVotes:"まだ票がありません。少し待ってみてください。",
     followPh:"その後を追記（どうしましたか？）",followSave:"追記を保存",update:"その後",copy:"結果をコピー",copied:"コピーしました",
     youSaid:"あなたの判定",agree:"があなたと同じ意見",of:"/",comments:"コメント",commentPh:"コメントを残す（任意）",send:"送信",next:"スキップ →",
@@ -41,7 +41,7 @@ const T = {
     exWhy:"これはサンプルカードなので、投票は保存されていません。サンプルは本物の相談がまだ1件もないときだけ表示されます。本物の相談が投稿されると、投票とコメントはすべて保存・集計されます。",askFirst:"最初の相談を投稿する →",
     safetyTitle:"あなたの安全に関わる内容かもしれません",safetyBody:"この投稿は公開していません。これは投票で決めることではなく、きちんとしたサポートを受けてほしい内容です。無料・秘密厳守の相談窓口：",
     back:"編集に戻る",ageTitle:"18歳以上限定",ageBody:"Split or Stay は大人向けのサービスです。投稿は匿名で、見知らぬ人が判定します。",ageYes:"18歳以上です",
-    tHome:"ホーム",splitWord:"別れる",vsTitle:"アメリカ vs 日本",nameUS:"アメリカ",nameJP:"日本",nameOther:"その他の地域",noRegionVotes:"まだ票がありません",totalVotes:"票（合計）",yourComment:"あなたのコメント",report:"⚑ 通報",reportArm:"⚑ もう一度タップで通報",reported:"通報しました。確認します。",terms:"利用規約",privacy:"プライバシー",contact:"お問い合わせ",connecting:"接続中…",rateLimited:"操作が速すぎます。少し時間をおいて試してください。",netErr:"サーバーに接続できません。通信環境を確認して再読み込みしてください。",agree:"投稿すると<a href=\"/terms.html\">利用規約</a>と<a href=\"/privacy.html\">プライバシーポリシー</a>に同意したものとみなされます。",ageBodyHtml:"Split or Stay は大人向けのサービスです。投稿は匿名で、見知らぬ人が判定します。続けることで<a href=\"/terms.html\">利用規約</a>と<a href=\"/privacy.html\">プライバシーポリシー</a>に同意したものとみなされます。",shareTail:"判定してね：",tJudge:"判定",tAsk:"相談",tMine:"マイ",regionUS:"🇺🇸 アメリカ",regionJP:"🇯🇵 東京/日本",regionOther:"🌐 その他",
+    tHome:"ホーム",homeScope:"地域",translate:"翻訳",original:"原文を表示",machineTr:"機械翻訳",translated:"翻訳",trFail:"今は翻訳できません。しばらくしてからお試しください。",postedTitle:"投稿しました！",postedBody:"{aud}のユーザーに公開されました。すぐに判定が始まります。",viewMine:"自分の相談を見る",judgeWhile:"待っている間に判定する",askAnother:"もう一つ相談する",tabQ:"わたしの相談",tabR:"わたしの回答",edit:"編集",delete:"削除",save:"保存",cancel:"キャンセル",saved:"保存しました",deleted:"削除しました",yesDelete:"削除する",delQTitle:"この相談を削除しますか？",delQBody:"投票とコメントもすべて削除されます。元に戻せません。",delRTitle:"この回答を削除しますか？",delRBody:"この相談へのあなたの投票とコメントが削除されます。",repliesEmpty:"まだ何も判定していません。",yourVote:"あなたの判定",hiddenChip:"通報により非表示",splitWord:"別れる",vsTitle:"アメリカ vs 日本",nameUS:"アメリカ",nameJP:"日本",nameOther:"その他の地域",noRegionVotes:"まだ票がありません",totalVotes:"票（合計）",yourComment:"あなたのコメント",report:"⚑ 通報",reportArm:"⚑ もう一度タップで通報",reported:"通報しました。確認します。",terms:"利用規約",privacy:"プライバシー",contact:"お問い合わせ",connecting:"接続中…",rateLimited:"操作が速すぎます。少し時間をおいて試してください。",netErr:"サーバーに接続できません。通信環境を確認して再読み込みしてください。",agree:"投稿すると<a href=\"/terms.html\">利用規約</a>と<a href=\"/privacy.html\">プライバシーポリシー</a>に同意したものとみなされます。",ageBodyHtml:"Split or Stay は大人向けのサービスです。投稿は匿名で、見知らぬ人が判定します。続けることで<a href=\"/terms.html\">利用規約</a>と<a href=\"/privacy.html\">プライバシーポリシー</a>に同意したものとみなされます。",shareTail:"判定してね：",tJudge:"判定",tAsk:"相談",tMine:"マイ",regionUS:"🇺🇸 アメリカ",regionJP:"🇯🇵 東京/日本",regionOther:"🌐 その他",
     offline:"この画面ではライブデータを使えないため、サンプルカードのみ表示しています。",err:"保存できませんでした。もう一度お試しください。",
     lens:{a:"6ヶ月未満",b:"6ヶ月〜1年",c:"1〜3年",d:"3年以上",m:"結婚している"},
     tags:{cheat:"浮気",ldr:"遠距離",ghost:"既読無視",family:"家族の反対",money:"お金",marriage:"結婚のタイミング",spark:"冷めた",jeal:"嫉妬",other:"その他"}}
@@ -82,6 +82,8 @@ function applyText(){
   const lenSel=$("qLen"), cur=lenSel.value||"c";
   lenSel.innerHTML = LENS.map(k=>`<option value="${k}">${esc(t("lens")[k])}</option>`).join("");
   lenSel.value=cur;
+  $("homeScope").innerHTML = SCOPES.map(k=>`<button type="button" data-hscope="${k}" aria-pressed="${scope===k}">${esc(t("aud")[k])}</button>`).join("");
+  $("homeScope").querySelectorAll("[data-hscope]").forEach(b=>b.onclick=()=>setScope(b.dataset.hscope));
   $("audSeg").innerHTML = SCOPES.map(k=>`<button type="button" data-aud="${k}" aria-pressed="${audSel===k}">${esc(t("aud")[k])}</button>`).join("");
   $("tagChips").innerHTML = TAGS.map(k=>`<button type="button" class="tagbtn" data-tag="${k}" aria-pressed="${tagsSel.has(k)}">${esc(t("tags")[k])}</button>`).join("");
   updateStats();
@@ -119,7 +121,7 @@ function setEnabled(){ $("postBtn").disabled = !live; }
 
 /* ---------- data ---------- */
 async function loadPosts(){
-  const {data,error}=await sb.from("posts").select("id,text,tags,len,lang,region,aud,author,followup,created_at").eq("hidden",false).order("created_at",{ascending:false}).limit(500);
+  const {data,error}=await sb.from("posts").select("id,text,text_tr,tags,len,lang,region,aud,author,followup,created_at").eq("hidden",false).order("created_at",{ascending:false}).limit(500);
   if(error){ toast(errMsg(error)); return; }
   posts=data||[]; postsAt=Date.now(); updateStats();
 }
@@ -143,13 +145,13 @@ function pickNext(){
   return posts.find(p=>p.author!==uid && !voted[p.id] && !seen.has(p.id) && inScope(p)) || null;
 }
 function cardHTML(p, back){
-  const L=T[p.lang]||T[lang];
+  const L=T[lang];
   const lensTxt = L.lens[p.len] || "";
   const tagTxt = (p.tags||[]).map(k=>`<span class="chip">${esc(L.tags[k]||k)}</span>`).join("");
   return `<div class="card${back?" back":""}">
     ${back?"":`<div class="stamp brk">${esc(t("brk"))}</div><div class="stamp stay">${esc(t("stay"))}</div>`}
-    <div class="meta"><span class="chip">${FLAG[p.region]||"🌐"}</span>${lensTxt?`<span class="chip">${esc(lensTxt)}</span>`:""}${tagTxt}</div>
-    <div class="body">${esc(p.text)}</div>
+    <div class="meta"><span class="chip">${FLAG[p.region]||"🌐"}</span>${lensTxt?`<span class="chip">${esc(lensTxt)}</span>`:""}${tagTxt}${back?"":trButtonHTML(p)}</div>
+    <div class="body tr-body">${esc(p.text)}</div>
     <div class="foot"><span>#${esc(String(p.id).slice(0,5))}</span>${back?"":`<button class="rep" type="button" id="repBtn">${esc(t("report"))}</button>`}</div>
   </div>`;
 }
@@ -175,6 +177,7 @@ function nextCard(){
   setActions(true);
   const card=deck.querySelector(".card:not(.back)");
   bindDrag(card);
+  bindTranslate(card,current);
   const rb=$("repBtn");
   rb.addEventListener("pointerdown",e=>e.stopPropagation());
   rb.onclick=async e=>{
@@ -315,33 +318,129 @@ $("askForm").addEventListener("submit",async e=>{
   $("postBtn").disabled=true;
   const row={text:mask(raw).slice(0,800),tags:[...tagsSel],len:$("qLen").value,lang:/[぀-ヿ一-鿿]/.test(raw)?"ja":"en",region,aud:audSel,author:uid};
   const {error}=await sb.from("posts").insert(row);
-  if(error){ out.innerHTML=`<div class="notice">${esc(errMsg(error))}</div>`; }
-  else{
-    $("qText").value=""; $("qCount").textContent="0"; tagsSel.clear(); applyText(); touchProfile(true);
-    out.innerHTML=`<div class="notice">${esc(t("posted"))} <button class="btn ghost" type="button" data-go="mine" style="margin-left:6px">${esc(t("tMine"))} →</button></div>`;
-    loadPosts();
-  }
   $("postBtn").disabled=!live;
+  if(error){ out.innerHTML=`<div class="notice">${esc(errMsg(error))}</div>`; return; }
+  $("qText").value=""; $("qCount").textContent="0"; tagsSel.clear(); applyText(); touchProfile(true);
+  $("askForm").hidden=true;
+  out.innerHTML=`<div class="success">
+      <div class="ok-badge" aria-hidden="true">✓</div>
+      <h2>${esc(t("postedTitle"))}</h2>
+      <p class="muted" style="margin:0">${esc(t("postedBody").replace("{aud}", t("aud")[row.aud]))}</p>
+      <div class="q-preview">${esc(row.text)}</div>
+      <button class="btn wide" type="button" id="goMineQ">${esc(t("viewMine"))}</button>
+      <button class="btn ghost wide" type="button" data-go="judge">${esc(t("judgeWhile"))}</button>
+      <button class="btn ghost wide" type="button" id="askAgain">${esc(t("askAnother"))}</button>
+    </div>`;
+  $("goMineQ").onclick=()=>{ mineTab="q"; go("mine"); };
+  $("askAgain").onclick=()=>{ out.innerHTML=""; $("askForm").hidden=false; window.scrollTo(0,0); };
+  window.scrollTo(0,0);
+  loadPosts();
 });
+/* leaving the Ask tab resets a finished post back to an empty form */
+document.querySelectorAll('nav.tabs [data-go="ask"]').forEach(b=>b.addEventListener("click",()=>{ if($("askForm").hidden && $("askOut").querySelector(".success")){ $("askOut").innerHTML=""; $("askForm").hidden=false; } }));
+
+/* ---------- translation ---------- */
+const trCache={};
+async function translateText(p){
+  if(p.text_tr) return p.text_tr;
+  if(trCache[p.id]) return trCache[p.id];
+  const pair=(p.lang==="ja"?"ja":"en")+"|"+(lang==="ja"?"ja":"en");
+  const parts=[]; let buf="";
+  (p.text.match(/[^。！？.!?\n]+[。！？.!?\n]*/g)||[p.text]).forEach(s=>{ if((buf+s).length>400){ if(buf) parts.push(buf); buf=s; } else buf+=s; });
+  if(buf) parts.push(buf);
+  const outs=[];
+  for(const q of parts){
+    const r=await fetch("https://api.mymemory.translated.net/get?q="+encodeURIComponent(q)+"&langpair="+encodeURIComponent(pair));
+    const j=await r.json();
+    const tx=j&&j.responseData&&j.responseData.translatedText;
+    if(!tx || Number(j.responseStatus)!==200) throw new Error("tr");
+    outs.push(tx);
+  }
+  const res=outs.join(lang==="ja"?"":" ");
+  trCache[p.id]=res; return res;
+}
+function trButtonHTML(p){ return p.lang && p.lang!==lang ? `<button class="trbtn" type="button" data-tr="0">${esc(t("translate"))}</button>` : ""; }
+function bindTranslate(root,p){
+  const btn=root.querySelector(".trbtn"), body=root.querySelector(".tr-body");
+  if(!btn||!body) return;
+  btn.addEventListener("pointerdown",e=>e.stopPropagation());
+  btn.onclick=async e=>{
+    e.stopPropagation();
+    if(btn.dataset.tr==="1"){ body.textContent=p.text; btn.dataset.tr="0"; btn.textContent=t("translate"); root.querySelector(".tr-note")?.remove(); return; }
+    btn.disabled=true; btn.textContent="…";
+    try{
+      const tx=await translateText(p);
+      body.textContent=tx; btn.dataset.tr="1"; btn.textContent=t("original");
+      if(!root.querySelector(".tr-note")){ const n=document.createElement("div"); n.className="tr-note"; n.textContent=t(p.text_tr?"translated":"machineTr"); body.after(n); }
+    }catch(err){ toast(t("trFail")); btn.textContent=t("translate"); }
+    btn.disabled=false;
+  };
+}
+
+/* ---------- confirm dialog ---------- */
+function confirmDialog(title, body, yes){
+  return new Promise(resolve=>{
+    $("cfTitle").textContent=title; $("cfBody").textContent=body;
+    $("cfYes").textContent=yes||t("yesDelete"); $("cfNo").textContent=t("cancel");
+    $("confirmBox").hidden=false;
+    const done=v=>{ $("confirmBox").hidden=true; $("cfYes").onclick=null; $("cfNo").onclick=null; resolve(v); };
+    $("cfYes").onclick=()=>done(true); $("cfNo").onclick=()=>done(false);
+  });
+}
 
 /* ---------- mine ---------- */
+let mineTab="q";
 async function renderMine(){
   const list=$("mineList");
+  $("mineTabs").innerHTML=[["q","tabQ"],["r","tabR"]].map(([k,l])=>`<button type="button" data-mtab="${k}" aria-pressed="${mineTab===k}">${esc(t(l))}</button>`).join("");
+  $("mineTabs").querySelectorAll("[data-mtab]").forEach(b=>b.onclick=()=>{ mineTab=b.dataset.mtab; renderMine(); });
   if(!live){ list.innerHTML=`<div class="notice">${esc(t("connecting"))}</div>`; return; }
-  const {data:mine,error}=await sb.from("posts").select("*").eq("author",uid).order("created_at",{ascending:false});
+  list.innerHTML=`<p class="muted small">${esc(t("connecting"))}</p>`;
+  if(mineTab==="q") return renderMyQuestions(list);
+  return renderMyReplies(list);
+}
+async function renderMyQuestions(list){
+  const {data:mine,error}=await sb.from("posts").select("id,text,text_tr,tags,len,lang,region,aud,author,followup,hidden,created_at").eq("author",uid).order("created_at",{ascending:false});
   if(error){ list.innerHTML=`<div class="notice">${esc(errMsg(error))}</div>`; return; }
   if(!mine.length){ list.innerHTML=`<div class="empty" style="position:static;padding:32px 20px"><p class="muted" style="margin:0">${esc(t("mineEmpty"))}</p><button class="btn" type="button" data-go="ask">${esc(t("askNow"))}</button></div>`; return; }
   const all = await fetchVotes(mine.map(p=>p.id));
   const tallies = mine.map(p=>tally(all.filter(v=>v.post_id===p.id)));
-  list.innerHTML = `<div style="display:grid;gap:14px">${mine.map((p,i)=>{ const tl=tallies[i]; const bp=tl.n?Math.round(tl.b/tl.n*100):0;
-    return `<article class="qcard">
-      <div class="meta" style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">${esc(t("aud")[p.aud||"global"])}</span>${(p.tags||[]).map(k=>`<span class="chip">${esc(T[lang].tags[k]||k)}</span>`).join("")}<span class="chip">${esc(new Date(p.created_at).toLocaleDateString(lang))}</span>${p.hidden?`<span class="chip" style="color:var(--brk)">hidden</span>`:""}</div>
-      <div class="q">${esc(p.text)}</div>
-      ${tl.n?`${splitHTML(tl)}${compareHTML(tl)}${commentsHTML(tl.cms,20)}
-        <button class="btn ghost" type="button" data-copy="${i}">${esc(t("copy"))}</button>`:`<p class="muted small" style="margin:0">${esc(t("noVotes"))}</p>`}
+  list.innerHTML = `<div style="display:grid;gap:14px">${mine.map((p,i)=>{ const tl=tallies[i];
+    return `<article class="qcard" data-i="${i}">
+      <div class="meta" style="display:flex;gap:6px;flex-wrap:wrap"><span class="chip">${esc(t("aud")[p.aud||"global"])}</span>${(p.tags||[]).map(k=>`<span class="chip">${esc(T[lang].tags[k]||k)}</span>`).join("")}<span class="chip">${esc(new Date(p.created_at).toLocaleDateString(lang))}</span>${p.hidden?`<span class="chip" style="color:var(--brk)">${esc(t("hiddenChip"))}</span>`:""}</div>
+      <div class="q view-only">${esc(p.text)}</div>
+      <div class="edit-box" hidden>
+        <textarea maxlength="800">${esc(p.text)}</textarea>
+        <div class="seg">${SCOPES.map(k=>`<button type="button" data-eaud="${k}" aria-pressed="${(p.aud||"global")===k}">${esc(t("aud")[k])}</button>`).join("")}</div>
+        <div class="row"><button class="btn ghost" type="button" data-act="cancel">${esc(t("cancel"))}</button><button class="btn" type="button" data-act="save">${esc(t("save"))}</button></div>
+      </div>
+      ${tl.n?`${splitHTML(tl)}${compareHTML(tl)}${commentsHTML(tl.cms,20)}`:`<p class="muted small" style="margin:0">${esc(t("noVotes"))}</p>`}
       ${p.followup?`<div class="followup"><b>${esc(t("update"))}:</b> ${esc(p.followup)}</div>`:""}
       <div class="row"><input type="text" id="fu-${i}" maxlength="300" placeholder="${esc(t("followPh"))}"><button class="btn ghost" type="button" data-fu="${i}">${esc(t("followSave"))}</button></div>
+      <div class="row card-actions">${tl.n?`<button class="pill" type="button" data-copy="${i}">${esc(t("copy"))}</button>`:""}<span style="flex:1"></span><button class="pill" type="button" data-act="edit">${esc(t("edit"))}</button><button class="pill danger" type="button" data-act="del">${esc(t("delete"))}</button></div>
     </article>`}).join("")}</div>`;
+  list.querySelectorAll("article.qcard").forEach(card=>{
+    const i=+card.dataset.i, p=mine[i]; let eAud=p.aud||"global";
+    const box=card.querySelector(".edit-box"), view=card.querySelector(".view-only");
+    card.querySelectorAll("[data-eaud]").forEach(b=>b.onclick=()=>{ eAud=b.dataset.eaud; card.querySelectorAll("[data-eaud]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.eaud===eAud)); });
+    card.querySelector('[data-act="edit"]').onclick=()=>{ box.hidden=false; view.hidden=true; box.querySelector("textarea").focus(); };
+    card.querySelector('[data-act="cancel"]').onclick=()=>{ box.hidden=true; view.hidden=false; };
+    card.querySelector('[data-act="save"]').onclick=async e=>{
+      const v=box.querySelector("textarea").value.trim();
+      if(v.length<30){ toast(t("tooShort")); return; }
+      if(CRISIS.some(re=>re.test(v))){ toast(t("safetyTitle")); return; }
+      e.target.disabled=true;
+      const {error}=await sb.from("posts").update({text:mask(v).slice(0,800),aud:eAud}).eq("id",p.id);
+      if(error){ toast(errMsg(error)); e.target.disabled=false; return; }
+      toast(t("saved")); loadPosts(); renderMine();
+    };
+    card.querySelector('[data-act="del"]').onclick=async()=>{
+      if(!(await confirmDialog(t("delQTitle"), t("delQBody")))) return;
+      const {error}=await sb.from("posts").delete().eq("id",p.id);
+      if(error){ toast(errMsg(error)); return; }
+      toast(t("deleted")); posts=posts.filter(x=>x.id!==p.id); updateStats(); renderMine();
+    };
+  });
   list.querySelectorAll("[data-copy]").forEach(b=>b.onclick=()=>{
     const tl=tallies[+b.dataset.copy], bp=Math.round(tl.b/tl.n*100);
     const reg=["us","jp"].map(r=>{const x=tl.reg[r],n=x.b+x.s;return n?`${FLAG[r]} ${Math.round(x.b/n*100)}% ${lang==="ja"?"別れる":"Split"}`:""}).filter(Boolean).join(" vs ");
@@ -355,7 +454,51 @@ async function renderMine(){
     if(error){ toast(errMsg(error)); b.disabled=false; } else renderMine();
   });
 }
+async function renderMyReplies(list){
+  const {data,error}=await sb.from("votes").select("post_id,choice,comment,updated_at,posts(id,text,text_tr,lang,aud,region)").eq("user_id",uid).order("updated_at",{ascending:false}).limit(300);
+  if(error){ list.innerHTML=`<div class="notice">${esc(errMsg(error))}</div>`; return; }
+  const mine=(data||[]).filter(v=>v.posts);
+  if(!mine.length){ list.innerHTML=`<div class="empty" style="position:static;padding:32px 20px"><p class="muted" style="margin:0">${esc(t("repliesEmpty"))}</p><button class="btn" type="button" data-go="judge">${esc(t("judgeBtn"))}</button></div>`; return; }
+  const all = await fetchVotes(mine.map(v=>v.post_id));
+  list.innerHTML = `<div style="display:grid;gap:14px">${mine.map((v,i)=>{ const p=v.posts, tl=tally(all.filter(x=>x.post_id===v.post_id));
+    return `<article class="qcard reply" data-i="${i}">
+      <div class="meta" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="chip">${FLAG[p.region]||"🌐"}</span><span class="chip">${esc(t("aud")[p.aud||"global"])}</span><span style="flex:1"></span>${trButtonHTML(p)}</div>
+      <div class="q tr-body clamp">${esc(p.text)}</div>
+      <div class="my-vote"><span class="label">${esc(t("yourVote"))}</span> <b class="${v.choice==="break"?"brk":"stay"}">${v.choice==="break"?"💔 "+esc(t("brk")):"❤️ "+esc(t("stay"))}</b></div>
+      <div class="cm my-cm"${v.comment?"":" hidden"}><span class="who">${esc(t("yourComment"))}</span>${esc(v.comment||"")}</div>
+      <div class="edit-box" hidden>
+        <div class="seg two"><button type="button" data-ech="break" aria-pressed="${v.choice==="break"}">💔 ${esc(t("brk"))}</button><button type="button" data-ech="stay" aria-pressed="${v.choice==="stay"}">❤️ ${esc(t("stay"))}</button></div>
+        <input type="text" maxlength="280" value="${esc(v.comment||"")}" placeholder="${esc(t("commentPh"))}">
+        <div class="row"><button class="btn ghost" type="button" data-act="cancel">${esc(t("cancel"))}</button><button class="btn" type="button" data-act="save">${esc(t("save"))}</button></div>
+      </div>
+      ${splitHTML(tl)}${compareHTML(tl)}
+      <div class="row card-actions"><span style="flex:1"></span><button class="pill" type="button" data-act="edit">${esc(t("edit"))}</button><button class="pill danger" type="button" data-act="del">${esc(t("delete"))}</button></div>
+    </article>`}).join("")}</div>`;
+  list.querySelectorAll("article.reply").forEach(card=>{
+    const v=mine[+card.dataset.i]; let ch=v.choice;
+    bindTranslate(card, v.posts);
+    card.querySelector(".tr-body").onclick=e=>e.currentTarget.classList.toggle("clamp");
+    const box=card.querySelector(".edit-box");
+    card.querySelectorAll("[data-ech]").forEach(b=>b.onclick=()=>{ ch=b.dataset.ech; card.querySelectorAll("[data-ech]").forEach(x=>x.setAttribute("aria-pressed",x.dataset.ech===ch)); });
+    card.querySelector('[data-act="edit"]').onclick=()=>{ box.hidden=false; };
+    card.querySelector('[data-act="cancel"]').onclick=()=>{ box.hidden=true; };
+    card.querySelector('[data-act="save"]').onclick=async e=>{
+      const c=mask(box.querySelector("input").value.trim()).slice(0,280);
+      e.target.disabled=true;
+      const {error}=await sb.from("votes").update({choice:ch,comment:c||null}).eq("post_id",v.post_id).eq("user_id",uid);
+      if(error){ toast(errMsg(error)); e.target.disabled=false; return; }
+      voted[v.post_id]=ch; toast(t("saved")); renderMine();
+    };
+    card.querySelector('[data-act="del"]').onclick=async()=>{
+      if(!(await confirmDialog(t("delRTitle"), t("delRBody")))) return;
+      const {error}=await sb.from("votes").delete().eq("post_id",v.post_id).eq("user_id",uid);
+      if(error){ toast(errMsg(error)); return; }
+      delete voted[v.post_id]; updateStats(); toast(t("deleted")); renderMine();
+    };
+  });
+}
 $("refreshMine").onclick=renderMine;
+
 
 /* ---------- age gate ---------- */
 if(!ls.get("sos_age",false)) $("ageGate").hidden=false;

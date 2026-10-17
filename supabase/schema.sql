@@ -201,3 +201,84 @@ create or replace view public.vote_feed as
   join public.posts p on p.id = v.post_id
   where not p.hidden;
 grant select on public.vote_feed to anon, authenticated;
+
+-- =====================================================================
+-- v2: starter questions that retire themselves, translations,
+--     editing/deleting your own questions and replies
+-- Safe to run more than once.
+-- =====================================================================
+
+alter table public.posts add column if not exists seeded  boolean not null default false;
+alter table public.posts add column if not exists text_tr text;
+
+-- Users may edit their own question (text, tags, length, audience) and follow-up.
+create or replace function public.guard_post()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+  if public.is_internal() then
+    return new;
+  end if;
+  if tg_op = 'INSERT' then
+    if (select count(*) from public.posts
+         where author = auth.uid() and created_at > now() - interval '1 hour') >= 5 then
+      raise exception 'rate_limited';
+    end if;
+    new.author := auth.uid();
+    new.created_at := now();
+    new.hidden := false;
+    new.followup := null;
+    new.seeded := false;
+    new.text_tr := null;
+  elsif tg_op = 'UPDATE' and not public.is_admin() then
+    new.author := old.author; new.created_at := old.created_at; new.hidden := old.hidden;
+    new.seeded := old.seeded; new.region := old.region; new.lang := old.lang;
+    if new.text is distinct from old.text then new.text_tr := null; else new.text_tr := old.text_tr; end if;
+  end if;
+  return new;
+end $$;
+
+-- Every new question from a real person removes one starter question,
+-- preferring the same audience and the one with the fewest votes.
+create or replace function public.retire_seed()
+returns trigger language plpgsql security definer set search_path = public as $$
+declare victim uuid;
+begin
+  if new.seeded or new.author is null then
+    return new;
+  end if;
+  select p.id into victim
+    from public.posts p
+   where p.seeded
+   order by (p.aud = new.aud) desc,
+            (select count(*) from public.votes v where v.post_id = p.id) asc,
+            p.created_at asc
+   limit 1;
+  if victim is not null then
+    delete from public.posts where id = victim;
+  end if;
+  return new;
+end $$;
+drop trigger if exists retire_seed on public.posts;
+create trigger retire_seed after insert on public.posts
+  for each row execute function public.retire_seed();
+
+-- Owners can delete their own questions; voters can delete their own replies.
+drop policy if exists posts_delete on public.posts;
+create policy posts_delete on public.posts for delete to authenticated
+  using (author = auth.uid() or public.is_admin());
+drop policy if exists votes_delete on public.votes;
+create policy votes_delete on public.votes for delete to authenticated
+  using (user_id = auth.uid());
+grant delete on public.votes to authenticated;
+
+-- Hide the "seeded" flag from everyone: column-level read access.
+revoke select on public.posts from anon, authenticated;
+grant select (id, text, text_tr, tags, len, lang, region, aud, author, followup, hidden, created_at)
+  on public.posts to anon, authenticated;
+
+-- Admin-only: which questions are starter questions.
+create or replace function public.seed_ids()
+returns setof uuid language sql stable security definer set search_path = public as $$
+  select id from public.posts where seeded and public.is_admin();
+$$;
+grant execute on function public.seed_ids() to authenticated;

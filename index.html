@@ -9,8 +9,8 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Split or Stay — 別れる？別れない？">
 <meta property="og:description" content="Strangers in the US and Japan decide. You choose. 匿名で恋愛相談、日米の誰かが判定。">
-<meta property="og:url" content="https://split-or-stay.vercel.app/">
-<meta property="og:image" content="https://split-or-stay.vercel.app/og.png">
+<meta property="og:url" content="https://YOUR-SITE.vercel.app/">
+<meta property="og:image" content="https://YOUR-SITE.vercel.app/og.png">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -41,7 +41,8 @@
       <button class="bigbtn judge" type="button" data-go="judge"><span><span data-t="judgeBtn"></span><small data-t="judgeSub"></small></span><span class="arr">→</span></button>
       <button class="bigbtn ask" type="button" data-go="ask"><span><span data-t="askBtn"></span><small data-t="askSub"></small></span><span class="arr">＋</span></button>
     </div>
-    <div class="stat">
+    <div class="field" style="margin-top:24px"><span class="label" data-t="homeScope"></span><div class="seg" id="homeScope"></div></div>
+    <div class="stat" style="margin-top:14px">
       <div><b id="statQ">–</b><span class="small muted" data-t="statQ"></span></div>
       <div><b id="statMine">–</b><span class="small muted" data-t="statMine"></span></div>
     </div>
@@ -106,6 +107,7 @@
         <h2 data-t="mineTitle"></h2>
         <button class="pill" id="refreshMine" type="button" data-t="refresh"></button>
       </div>
+      <div class="seg two" id="mineTabs"></div>
       <div id="mineList"></div>
     </div>
   </section>
@@ -121,6 +123,14 @@
     <button type="button" data-go="mine"><span>☰</span><em data-t="tMine" style="font-style:normal"></em></button>
   </div>
 </nav>
+
+<div class="overlay" id="confirmBox" hidden>
+  <div class="dialog" role="alertdialog" aria-labelledby="cfTitle">
+    <h2 id="cfTitle" style="text-transform:none;font-size:22px"></h2>
+    <p class="muted" style="margin:0" id="cfBody"></p>
+    <div class="row"><button class="btn ghost" type="button" id="cfNo" style="flex:1"></button><button class="btn danger-fill" type="button" id="cfYes" style="flex:1"></button></div>
+  </div>
+</div>
 
 <div class="overlay" id="ageGate" hidden>
   <div class="dialog">
