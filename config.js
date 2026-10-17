@@ -7,7 +7,7 @@ window.SOS_CONFIG = {
   supabaseAnonKey: "sb_publishable_NgSinZ-LZKP3iOv78qAVsw_-8saNNmB",
 
   // Shown on the home page, Terms and Privacy pages. Use an address you check.
-  contactEmail: "leslie71417@gmail.com",
+  contactEmail: "singularity0142@gmail.com",
 
   // Starting numbers for "people are waiting for your verdict", per region.
   // Real waiting questions are added on top. Set all to 0 to show real numbers only.
